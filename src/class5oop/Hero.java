@@ -1,20 +1,21 @@
 package class5oop;
 
-public class Hero {
+public abstract class Hero {
    private String name;
-   Enemy en;
+   private int damagelevel;
 
-    public Hero(String name) {
+    public Hero(String name, int dmglvl) {
         this.name = name;
+        this.damagelevel = dmglvl;
     }
 
     public String getName() {
         return name;
     }
 
-    public void attackEnemy() {
-        System.out.println(this.getName()+ " атакует врага");
-        //en.super();
-        en.takeDamage(-20);
+    public int getDamage() {
+        return damagelevel;
     }
+
+    abstract void attackEnemy(Enemy en);
 }

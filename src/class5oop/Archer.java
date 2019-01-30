@@ -1,14 +1,14 @@
 package class5oop;
 
 public class Archer extends Hero {
-    public Archer(String name) {
-        super(name);
+    public Archer(String name, int dmglvl) {
+        super(name, dmglvl);
     }
 
     @Override
-    public void attackEnemy() {
-        //super.attackEnemy();
+    public void attackEnemy(Enemy enemy) {
+
         System.out.println(this.getName() + " стреляет во врага");
-        en.takeDamage(-7);
+        enemy.takeDamage(this.getDamage());
     }
 }

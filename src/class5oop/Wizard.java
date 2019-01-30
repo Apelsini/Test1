@@ -1,14 +1,14 @@
 package class5oop;
 
 public class Wizard extends Hero {
-    public Wizard(String name) {
-        super(name);
+    public Wizard(String name, int dmglvl) {
+        super(name, dmglvl);
     }
 
     @Override
-    public void attackEnemy() {
+    public void attackEnemy(Enemy enemy) {
         //super.attackEnemy();
         System.out.println(this.getName() + " проклинает врага");
-        en.takeDamage(-25);
+        enemy.takeDamage(this.getDamage());
     }
 }

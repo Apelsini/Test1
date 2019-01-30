@@ -21,6 +21,8 @@ public class Enemy {
     public void takeDamage (int dam) {
         if ((this.getHealth()+dam)>0) {
             this.setHealth(this.getHealth()+dam);
+        } else {
+            this.setHealth(0);
         }
 
     }

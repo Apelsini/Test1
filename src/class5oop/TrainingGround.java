@@ -2,22 +2,21 @@ package class5oop;
 
 public class TrainingGround {
     public static void main(String[] args) {
-        Hero player1 = new Hero("Леголас");
+
         Enemy troll = new Enemy(100);
+        System.out.println("здоровье врага: " + troll.getHealth());
+
+        Hero cpu1 = new Warrior("Смерч", -55);
+        cpu1.attackEnemy(troll);
         System.out.println("здоровье врага: "+troll.getHealth());
 
-        player1.attackEnemy();
+        Hero cpu2 = new Wizard("Дункан", -42);
+        cpu2.attackEnemy(troll);
         System.out.println("здоровье врага: "+troll.getHealth());
-        /*
-        Warrior cpu1 = new Warrior("Смерч");
-        cpu1.attackEnemy();
+
+        Hero cpu3 = new Archer("Леголас", -20);
+        cpu3.attackEnemy(troll);
         System.out.println("здоровье врага: "+troll.getHealth());
-        Wizard cpu2 = new Wizard("Дункан");
-        cpu2.attackEnemy();
-        System.out.println("здоровье врага: "+troll.getHealth());
-        Archer cpu3 = new Archer("Леголас");
-        cpu3.attackEnemy();
-        System.out.println("здоровье врага: "+troll.getHealth());
-        */
+
     }
 }
