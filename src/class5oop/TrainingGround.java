@@ -5,18 +5,23 @@ public class TrainingGround {
 
         Enemy troll = new Enemy(100);
         System.out.println("здоровье врага: " + troll.getHealth());
+        System.out.println("враг жив? "+troll.IsAlive());
 
-        Hero cpu1 = new Warrior("Смерч", -55);
+
+        Hero cpu1 = new Warrior(100,"Смерч", -55);
         cpu1.attackEnemy(troll);
         System.out.println("здоровье врага: "+troll.getHealth());
+        System.out.println("враг жив? "+troll.IsAlive());
 
-        Hero cpu2 = new Wizard("Дункан", -42);
+        Hero cpu2 = new Wizard(100,"Дункан", -42);
         cpu2.attackEnemy(troll);
         System.out.println("здоровье врага: "+troll.getHealth());
+        System.out.println("враг жив? "+troll.IsAlive());
 
-        Hero cpu3 = new Archer("Леголас", -20);
+        Hero cpu3 = new Archer(100,"Леголас", -20);
         cpu3.attackEnemy(troll);
         System.out.println("здоровье врага: "+troll.getHealth());
+        System.out.println("враг жив? "+troll.IsAlive());
 
     }
 }

@@ -1,8 +1,8 @@
 package class5oop;
 
 public class Wizard extends Hero {
-    public Wizard(String name, int dmglvl) {
-        super(name, dmglvl);
+    public Wizard(int health, String name, int dmglvl) {
+        super(health, name, dmglvl);
     }
 
     @Override

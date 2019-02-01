@@ -2,8 +2,8 @@ package class5oop;
 
 public class Warrior extends Hero {
 
-    public Warrior(String name, int dmglvl) {
-        super(name, dmglvl);
+    public Warrior(int health, String name, int dmglvl) {
+        super(health, name, dmglvl);
     }
 
     @Override
