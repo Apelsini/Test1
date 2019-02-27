@@ -1,7 +1,6 @@
 package class12thread;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import javax.print.DocFlavor;
+import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -16,21 +15,54 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Ex2_2 {
     public static void main(String[] args) {
-      ArrayList<String>  Strings = new ArrayList<>(Arrays.asList("ve","c")) ;
-        ReentrantLock reentrantLock = new ReentrantLock;
-        ReadWriteLock readwriteLock = new ReadWriteLock() {
-            @Override
-            public Lock readLock() {
-                return null;
-            }
 
-            @Override
-            public Lock writeLock() {
-                return null;
-            }
+        Scanner scanner = new Scanner (System.in);
+        NumberSecSortable myList = new NumberSecSortable();
+
+        Thread thread = new Thread (() -> {
+           while (true) {
+               myList.sortStrings();
+               try {
+                   Thread.sleep(5000);
+
+
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+
+           }
+
+        });
+        thread.start();
+
+
+        while (true) {
+            String str = scanner.next();
+            myList.addString(str);
+
         }
 
-
-        Scanner scanner = new Sacanner (system.in);
     }
 }
+
+class NumberSecSortable {
+    private final Object monitor = new Object();
+
+    private List<String> strings = new ArrayList<>();
+
+    void addString (String s) {
+        synchronized (monitor) {
+            strings.add(s);
+        }
+    }
+
+    void sortStrings() {
+        synchronized (monitor) {
+            strings.sort(Comparator.naturalOrder());
+            System.out.println(strings);
+        }
+    }
+
+
+}
+

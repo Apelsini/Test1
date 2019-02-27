@@ -8,9 +8,10 @@ import java.util.Arrays;
 import static class7collections.Otsenki.countUnique;
 import static org.junit.Assert.*;
 
-/**
+*
  * Created by user on 13.02.2019.
- */
+
+
 public class OtsenkiTEstCaseTest {
     @Test
     public void testCountUnique() throws Exception {
