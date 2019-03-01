@@ -3,6 +3,7 @@ package class12thread;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -11,60 +12,70 @@ import java.util.concurrent.*;
 public class Ex_3_2_concurrent {
     private static volatile int num = 0;
     private static volatile String msg;
+    private static  AtomicInteger n = new AtomicInteger(0);
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         CustomExecutor myexec = new CustomExecutor(3);
-        LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
-                Runnable printsec = () -> {
+        Runnable printsec = () -> {
             try {
-                System.err.println(" thread " + num + " " + msg);
-                Thread.sleep(5000);
+                System.err.println(" thread " + n + " " + msg + " " + num);
+                Thread.sleep(1000);
+                //  n.incrementAndGet();
             } catch (InterruptedException ignore) {
             }
         };
-        num = 0;
-        msg = "first";
 
-        for (int i = 0; i<5; i++) {
-            num = i;
-            queue.put(printsec);
+        for (int i = 0; i < 4; i++) {
+            myexec.execute(printsec);
         }
-myexec.setRunnables(queue);
+
+
+
+        Thread.sleep(3000);
+        myexec.shutdown();
     }
 }
 
 class CustomExecutor implements Executor {
-    private int maxThreadsToRun;
-    private LinkedBlockingQueue<Runnable> runnables;
-
-    public LinkedBlockingQueue<Runnable> getRunnables() {
-        return runnables;
-    }
-
-    public void setRunnables(LinkedBlockingQueue<Runnable> runnables) {
-        this.runnables = runnables;
-    }
+    private volatile Thread worker;
+    private final LinkedBlockingQueue<Runnable> runnables;
 
     public CustomExecutor(int maxThreadsToRun) {
-        this.maxThreadsToRun = maxThreadsToRun;
         this.runnables = new LinkedBlockingQueue<>(maxThreadsToRun);
-        new Thread(new Runnable() {
+        this.worker = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
-                  new Thread (runnables.poll()).start();
+                while (!Thread.currentThread().isInterrupted()) {
+                    Thread thread = new Thread(() -> {
+                        try {
+                            runnables.take().run();
+                        } catch (InterruptedException e) {
+
+                        }
+                    });
+                    thread.setDaemon(true);
+                    thread.start();
                 }
             }
-        }).start();
+        });
+        worker.start();
     }
 
     @Override
     public void execute(Runnable runnable) {
-        try {
-            runnables.put(runnable);
-        } catch (InterruptedException e) {
-
+        if (!worker.isInterrupted()) {
+            new Thread(() -> {
+                try {
+                    runnables.put(runnable);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         }
+    }
+
+    public void shutdown() {
+        worker.interrupt();
     }
 
 }
