@@ -10,10 +10,8 @@ public class UserBuilder {
     private Integer age;
     private List<User> relatives;
 
-    public UserBuilder(String name, Integer age, List<User> relatives) {
-        this.name = name;
-        this.age = age;
-        this.relatives = relatives;
+    public UserBuilder() {
+
     }
 
     public UserBuilder name(String name){

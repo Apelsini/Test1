@@ -1,6 +1,8 @@
 package class15patterns;
 
 
+import java.util.List;
+
 import static java.util.Arrays.asList;
 
 /**
@@ -20,5 +22,17 @@ public class PatternsMain {
                 .relatives(asList(userParent))
                 .build();
         System.out.println(userParent.getName()+" "+userParent.getAge());
+
+        Animal huskee = new Animal("Huskee Bob", Animal.Type.DOG, userParent);
+        Animal whitecat = new Animal("Cat Showball", Animal.Type.CAT, userChildren);
+        List<Animal> animals = asList(huskee, whitecat);
+
+        AnimalManager animalManager = new AnimalManager(animals);
+
+        animalManager.doOnEach(new SitDownCommand());
+        animalManager.doOnEach(new layDownCommand());
+        animalManager.doOnEach(new VoiceCommand());
+
+
     }
 }
