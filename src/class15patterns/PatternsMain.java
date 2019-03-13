@@ -24,6 +24,7 @@ public class PatternsMain {
         System.out.println(userParent.getName()+" "+userParent.getAge());
 
         Animal huskee = new Animal("Huskee Bob", Animal.Type.DOG, userParent);
+        Animal spaniel = new Animal("Spaniel John", Animal.Type.DOG, userParent);
         Animal whitecat = new Animal("Cat Showball", Animal.Type.CAT, userChildren);
         List<Animal> animals = asList(huskee, whitecat);
 
@@ -32,6 +33,8 @@ public class PatternsMain {
         animalManager.doOnEach(new SitDownCommand());
         animalManager.doOnEach(new layDownCommand());
         animalManager.doOnEach(new VoiceCommand());
+
+        new UserRelativesFacade().printRelativesByAnimal(userChildren,huskee);
 
 
     }

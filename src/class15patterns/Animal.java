@@ -5,15 +5,39 @@ package class15patterns;
  */
 public class Animal {
 
+    private String name;
+    private Type type;
+    private User owner;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     public Animal(String name, Type type, User owner) {
         this.name = name;
         this.type = type;
         this.owner = owner;
     }
-
-    private String name;
-    private Type type;
-     private User owner;
 
     enum Type {
         DOG, CAT
