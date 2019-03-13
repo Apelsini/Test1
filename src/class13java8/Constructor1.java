@@ -22,15 +22,15 @@ public class Constructor1 {
         TriplePred<Singer> singerTriplePred = (arg1, arg2, arg3) -> arg1.name.isEmpty() && arg2.name.isEmpty() && arg3.name.isEmpty();
         singerTriplePred.test(new Singer(), new Singer(), new Singer());*/
 
-        Function<Singer, List<String>> singerToList = singer -> {
-            asList(singer.toString());
+      /*  Function<Singer, List<String>> singerToList = (singer) -> {
+           asList(singer.toString());
         };
 
         Singer prodigy = new Singer();
         prodigy.name = "Prodigy";
         prodigy.homeTown = "London";
 
-        Stream.of(singerToList(prodigy)).forEach(System.out::println);
+        System.out.println(Stream.of(singerToList(prodigy)));
 
 //        System.out.println(addUp(Stream.of(1,2,3,5)));
     }
@@ -42,5 +42,6 @@ public class Constructor1 {
 
     static List<String> songsBySinger(Stream<Singer> singers, Singer singerToFind) {
         return singers.filter(singer -> singerToFind);
+    }*/
     }
 }
