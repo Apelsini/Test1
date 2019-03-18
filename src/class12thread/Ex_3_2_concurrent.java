@@ -15,10 +15,10 @@ public class Ex_3_2_concurrent {
     private static  AtomicInteger n = new AtomicInteger(0);
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        CustomExecutor myexec = new CustomExecutor(3);
+        CustomExecutor myexec = new CustomExecutor(8);
         Runnable printsec = () -> {
             try {
-                System.err.println(" thread " + n + " " + msg + " " + num);
+                System.err.println(" thread " + Thread.currentThread().getName() + " " + msg + " " + n);
                 Thread.sleep(1000);
                 //  n.incrementAndGet();
             } catch (InterruptedException ignore) {
@@ -26,6 +26,7 @@ public class Ex_3_2_concurrent {
         };
 
         for (int i = 0; i < 4; i++) {
+            n.incrementAndGet();
             myexec.execute(printsec);
         }
 
